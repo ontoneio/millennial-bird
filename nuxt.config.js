@@ -10,6 +10,11 @@ export default {
   ** See https://nuxtjs.org/api/configuration-target
   */
   target: 'static',
+  publicRuntimeConfig: {},
+  privateRuntimeConfig: {
+    tsURL: process.env.TS_GRAPHQL_API_URL,
+    tsApiKey: process.env.TS_GRAPHQL_API_KEY,
+  },
   /*
   ** Headers of the page
   ** See https://nuxtjs.org/api/configuration-head
@@ -54,12 +59,36 @@ export default {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
+    'nuxt-graphql-request'
   ],
   /*
   ** Axios module configuration
   ** See https://axios.nuxtjs.org/options
   */
   axios: {},
+  graphql: {
+    /**
+     * Your GraphQL endpoint (required)
+     */
+    endpoint: `${process.env.TS_GRAPHQL_API_URL}`,
+
+    /**
+     * Enable support for AST
+     * default: false
+     */
+    AST: false,
+
+    /**
+     * Options
+     * See: https://github.com/prisma-labs/graphql-request
+     */
+    options: {
+      headers: {
+        authorization: `Bearer ${process.env.TS_GRAPHQL_API_KEY}`,
+      },
+      mode: 'cors',
+    },
+  },
   /*
   ** Build configuration
   ** See https://nuxtjs.org/api/configuration-build/
