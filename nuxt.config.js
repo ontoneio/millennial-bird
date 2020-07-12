@@ -70,7 +70,7 @@ export default {
     /**
      * Your GraphQL endpoint (required)
      */
-    endpoint: `${context.$config.tsURL}`,
+    endpoint: `${process.env.TS_GRAPHQL_API_URL}`,
 
     /**
      * Enable support for AST
@@ -84,7 +84,7 @@ export default {
      */
     options: {
       headers: {
-        authorization: `Bearer ${context.config.tsApiKey}`,
+        authorization: `Bearer ${process.env.TS_GRAPHQL_API_KEY}`,
       },
       mode: 'cors',
     },
